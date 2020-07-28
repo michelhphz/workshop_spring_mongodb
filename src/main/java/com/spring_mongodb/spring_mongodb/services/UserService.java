@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import com.spring_mongodb.spring_mongodb.domain.User;
+import com.spring_mongodb.spring_mongodb.dto.UserDTO;
 import com.spring_mongodb.spring_mongodb.repositories.UserRepository;
 import com.spring_mongodb.spring_mongodb.services.exceptions.ObjectNotFoundException;
 
@@ -23,5 +24,13 @@ public class UserService {
     public User findById(String id) {
         Optional<User> obj = repo.findById(id);
         return obj.orElseThrow(() -> new ObjectNotFoundException("Objeto não encontrado"));
+    }
+
+    public User insert(User obj) {
+        return repo.insert(obj);
+    }
+
+    public User fromDTO(UserDTO objDto) {
+        return new User(objDto.getId(), objDto.getName(), objDto.getEmail());
     }
 }
